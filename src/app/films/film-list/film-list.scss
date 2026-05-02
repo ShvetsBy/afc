@@ -1,0 +1,13 @@
+.filmsList {
+  width: 100%;
+
+  &-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  &-card {
+    max-width: 300px;
+  }
+}

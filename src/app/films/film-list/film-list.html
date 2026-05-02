@@ -1,0 +1,25 @@
+<section class="filmsList">
+  <h2>Film list</h2>
+
+  @if (!films().length) {
+    <p>No films available</p>
+  }
+
+  <div class="filmsList-cards">
+    @for (film of films(); track film.id) {
+      <article class="filmsList-card" (click)="openDetails(film)">
+        <img class="film-card__poster" [src]="film.posterUrl" [alt]="film.title" />
+
+        <div class="film-card__body">
+          <h2 class="film-card__title">{{ film.title }}</h2>
+          <p class="film-card__meta">{{ film.year }} · {{ film.genre }}</p>
+          <p class="film-card__rating">Rating: {{ film.rating }}</p>
+
+          <button type="button" class="film-card__favorite" (click)="toggleFavorite(film, $event)">
+            {{ film.isFavorite ? 'Remove from favorites' : 'Add to favorites' }}
+          </button>
+        </div>
+      </article>
+    }
+  </div>
+</section>
