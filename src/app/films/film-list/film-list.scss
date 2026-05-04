@@ -99,7 +99,6 @@
       font-weight: 500;
     }
 
-    /* ACTIVE STATE */
     &.active {
       background: #fef3f2;
       border-color: #e76f51;
@@ -112,8 +111,8 @@
   }
 
   &-cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 220px);
+    gap: 20px;
   }
 }
