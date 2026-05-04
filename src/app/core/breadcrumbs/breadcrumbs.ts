@@ -4,12 +4,28 @@ import { BreadcrumbService } from './breadcrumb.service';
 
 @Component({
   selector: 'app-breadcrumbs',
+  standalone: true,
   imports: [RouterLink],
-  templateUrl: './breadcrumbs.html',
+  template: `
+    @if (breadcrumbs().length) {
+      <nav class="breadcrumbs">
+        @for (crumb of breadcrumbs(); track crumb.url) {
+          @if (!$last) {
+            <a [routerLink]="crumb.url" class="breadcrumbs-item">
+              {{ crumb.label }}
+            </a>
+          } @else {
+            <span class="breadcrumbs-item" aria-current="page">
+              {{ crumb.label }}
+            </span>
+          }
+        }
+      </nav>
+    }
+  `,
   styleUrl: './breadcrumbs.scss',
 })
-export class Breadcrumbs {
+export class BreadCrumbs {
   private readonly breadcrumbService = inject(BreadcrumbService);
-
-  breadcrumbs = this.breadcrumbService.breadcrumbs;
+  readonly breadcrumbs = this.breadcrumbService.breadcrumbs;
 }

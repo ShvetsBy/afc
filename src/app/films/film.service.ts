@@ -21,7 +21,7 @@ export class FilmsService {
 
   toggleFavorite(id: number): void {
     this.films.update((films) =>
-      films.map((film) => (film.id === id ? { ...film, favorite: !film.isFavorite } : film)),
+      films.map((film) => (film.id === id ? { ...film, isFavorite: !film.isFavorite } : film)),
     );
   }
 

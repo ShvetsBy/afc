@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Film, FilmsService } from '../film.service';
 import { BreadcrumbService } from '../../core/breadcrumbs/breadcrumb.service';
@@ -13,26 +13,32 @@ export class FilmDetail {
   private readonly router = inject(Router);
   private readonly filmsService = inject(FilmsService);
   private readonly breadcrumbService = inject(BreadcrumbService);
-  film?: Film;
+
+  private readonly id = signal(Number(this.route.snapshot.paramMap.get('id')));
+
+  readonly film = computed(() => this.filmsService.getFilmById(this.id()));
 
   constructor() {
-    const idParam = this.route.snapshot.paramMap.get('id');
-    const id = idParam ? Number(idParam) : NaN;
+    const idValue = this.id();
 
-    if (!id || Number.isNaN(id)) {
-      this.router.navigate(['/films']);
+    if (!idValue || Number.isNaN(idValue)) {
+      this.router.navigate(['/404']);
       return;
     }
 
-    const film = this.filmsService.getFilmById(id);
+    const film = this.film();
 
     if (!film) {
-      this.router.navigate(['/films']);
+      this.router.navigate(['/404']);
       return;
     }
+  }
 
-    this.film = film;
-    this.breadcrumbService.setFilmBreadcrumb(film.title, film.id);
+  toggleFavorite(): void {
+    const film = this.film() as Film | undefined;
+    if (!film) return;
+
+    this.filmsService.toggleFavorite(film.id);
   }
 
   goBack(): void {

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { FilmsService, Film } from '../film.service';
 import { BreadcrumbService } from '../../core/breadcrumbs/breadcrumb.service';
@@ -12,14 +12,23 @@ import { BreadcrumbService } from '../../core/breadcrumbs/breadcrumb.service';
 export class FilmList {
   private readonly filmsService = inject(FilmsService);
   private readonly router = inject(Router);
-
+  readonly films = this.filmsService.films;
+  readonly search = signal('');
   private readonly breadcrumbService = inject(BreadcrumbService);
 
-  constructor() {
-    this.breadcrumbService.setListBreadcrumb();
+  onSearchInput(event: Event): void {
+    const target = event.target as HTMLInputElement | null;
+    this.search.set(target?.value ?? '');
   }
 
-  films = this.filmsService.films;
+  readonly filteredFilms = computed(() => {
+    const q = this.search().trim().toLowerCase();
+    if (!q) {
+      return this.films();
+    }
+
+    return this.films().filter((film) => film.title.toLowerCase().includes(q));
+  });
 
   openDetails(film: Film): void {
     this.router.navigate(['/films', film.id], {

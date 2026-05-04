@@ -1,25 +1,41 @@
 <section class="filmsList">
   <h2>Film list</h2>
 
+  <div class="filmsList-search">
+    <input
+      type="text"
+      class="filmsList-search-input"
+      placeholder="Search by title"
+      [value]="search()"
+      (input)="onSearchInput($event)"
+    />
+  </div>
+
   @if (!films().length) {
     <p>No films available</p>
+  } @else if (search().trim() && !filteredFilms().length) {
+    <p>No films match your search</p>
   }
 
   <div class="filmsList-cards">
-    @for (film of films(); track film.id) {
-      <article class="filmsList-card" (click)="openDetails(film)">
-        <img class="film-card__poster" [src]="film.posterUrl" [alt]="film.title" />
+    @for (film of filteredFilms(); track film.id) {
+      <div class="filmsList-card" (click)="openDetails(film)">
+        <img class="filmsList-card__poster" [src]="film.posterUrl" [alt]="film.title" />
 
-        <div class="film-card__body">
-          <h2 class="film-card__title">{{ film.title }}</h2>
-          <p class="film-card__meta">{{ film.year }} · {{ film.genre }}</p>
-          <p class="film-card__rating">Rating: {{ film.rating }}</p>
+        <div class="filmsList-card__body">
+          <h2 class="filmsList-card__title">{{ film.title }}</h2>
+          <p class="filmsList-card__meta">{{ film.year }} · {{ film.genre }}</p>
+          <p class="filmsList-card__rating">Rating: {{ film.rating }}</p>
 
-          <button type="button" class="film-card__favorite" (click)="toggleFavorite(film, $event)">
+          <button
+            type="button"
+            class="filmsList-card__favorite"
+            (click)="toggleFavorite(film, $event)"
+          >
             {{ film.isFavorite ? 'Remove from favorites' : 'Add to favorites' }}
           </button>
         </div>
-      </article>
+      </div>
     }
   </div>
 </section>

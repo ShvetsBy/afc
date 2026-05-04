@@ -1,20 +1,24 @@
 <section class="film-details">
   <button type="button" (click)="goBack()">Back</button>
 
-  @if (film) {
+  @if (film(); as film) {
     <div class="film-details__layout">
-      <img class="film-details__poster" [src]="film!.posterUrl" [alt]="film!.title" />
+      <img class="film-details__poster" [src]="film.posterUrl" [alt]="film.title" />
 
       <div class="film-details__info">
-        <h1>{{ film!.title }}</h1>
+        <h1>{{ film.title }}</h1>
 
-        <p>{{ film!.year }} · {{ film!.genre }}</p>
-        <p>Rating: {{ film!.rating }}</p>
-        <p>Duration: {{ film!.duration }} min</p>
+        <p>{{ film.year }} · {{ film.genre }}</p>
+        <p>Rating: {{ film.rating }}</p>
+        <p>Duration: {{ film.duration }} min</p>
 
         <p class="film-details__description">
-          {{ film!.description }}
+          {{ film.description }}
         </p>
+
+        <button type="button" class="film-details__favorite" (click)="toggleFavorite()">
+          {{ film.isFavorite ? 'Remove from favorites' : 'Add to favorites' }}
+        </button>
       </div>
     </div>
   } @else {
