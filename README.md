@@ -1,4 +1,5 @@
 # Afc
+<img width="1715" height="1285" alt="Screenshot 2026-05-04 at 22 06 42" src="https://github.com/user-attachments/assets/fd75a82a-f234-4234-a40e-9c12cc1c9453" />
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.5.
 
