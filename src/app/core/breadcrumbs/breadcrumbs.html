@@ -1,17 +1,9 @@
 <nav class="breadcrumbs">
   @if (breadcrumbs(); as crumbs) {
     @for (crumb of crumbs; track crumb.url) {
-      <a
-        class="breadcrumbs__link"
-        [routerLink]="crumb.url"
-        [class.breadcrumbs__link--active]="crumb === crumbs[crumbs.length - 1]"
-      >
+      <a [routerLink]="crumb.url">
         {{ crumb.label }}
       </a>
-
-      @if (crumb !== crumbs[crumbs.length - 1]) {
-        <span class="breadcrumbs__separator">/</span>
-      }
     }
   }
 </nav>

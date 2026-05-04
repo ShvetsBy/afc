@@ -1,5 +1,4 @@
-import { Component, inject } from '@angular/core';
-import { BreadcrumbService } from '../../core/breadcrumbs/breadcrumb.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-about',
@@ -7,6 +6,4 @@ import { BreadcrumbService } from '../../core/breadcrumbs/breadcrumb.service';
   templateUrl: './about.html',
   styleUrl: './about.scss',
 })
-export class About {
-  private readonly breadcrumbService = inject(BreadcrumbService);
-}
+export class About {}

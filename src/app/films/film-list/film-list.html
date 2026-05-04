@@ -1,24 +1,28 @@
 <section class="filmsList">
-  <h2>Film list</h2>
+  <div class="filmsList-utils">
+    <h2>Film list</h2>
 
-  <div class="filmsList-search">
-    <input
-      type="text"
-      class="filmsList-search-input"
-      placeholder="Search by title"
-      [value]="search()"
-      (input)="onSearchInput($event)"
-      appAutofocus
-    />
+    <div class="filmsList-search">
+      <input
+        type="text"
+        class="filmsList-search-input"
+        placeholder="Search by title"
+        [value]="search()"
+        (input)="onSearchInput($event)"
+        appAutofocus
+      />
+    </div>
+
+    <button type="button" class="filmsList-toggleFavorites" (click)="toggleShowFavorites()">
+      {{ showFavoritesOnly() ? '❤️ Favorites' : '🤍 Favorites' }}
+    </button>
   </div>
-
-  <button type="button" class="filmsList-toggleFavorites" (click)="toggleShowFavorites()">
-    {{ showFavoritesOnly() ? 'Show all films' : 'Show favorites only' }}
-  </button>
 
   @if (!films().length) {
     <p>No films available</p>
-  } @else if (search().trim() && !filteredFilms().length) {
+  } @else if (!filteredFilms().length && showFavoritesOnly()) {
+    <p>No favorite films yet</p>
+  } @else if (!filteredFilms().length) {
     <p>No films match your search</p>
   }
 

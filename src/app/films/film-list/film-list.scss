@@ -1,5 +1,13 @@
+@use '../../../styles/mixins' as *;
+
 .filmsList {
-  width: 100%;
+  @include content-container;
+
+  &-utils {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
   &-cards {
     display: flex;

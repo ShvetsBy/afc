@@ -1,9 +1,14 @@
+@use '../../../styles/mixins' as *;
+@use '../../../styles/variables' as *;
+
 .breadcrumbs {
+  @include content-container;
+  color: $Muted;
+
   &-item {
     &:not(:first-child)::before {
       content: '»';
       margin: 0 0.2rem;
-      color: #999;
     }
   }
 }
