@@ -1,0 +1,13 @@
+<div class="filmsList-card" (click)="onCardClick()">
+  <img class="filmsList-card__poster" [src]="film.posterUrl" [alt]="film.title" />
+
+  <div class="filmsList-card__body">
+    <h2 class="filmsList-card__title">{{ film.title }}</h2>
+    <p class="filmsList-card__meta">{{ film.year }} · {{ film.genre }}</p>
+    <p class="filmsList-card__rating">Rating: {{ film.rating }}</p>
+
+    <button type="button" class="filmsList-card__favorite" (click)="onFavoriteClick($event)">
+      {{ film.isFavorite ? 'Remove from favorites' : 'Add to favorites' }}
+    </button>
+  </div>
+</div>

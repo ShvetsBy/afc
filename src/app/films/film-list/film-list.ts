@@ -1,10 +1,13 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { FilmsService, Film } from '../film.service';
-import { BreadcrumbService } from '../../core/breadcrumbs/breadcrumb.service';
+
+import { AutofocusDirective } from '../../shared/autofocus.directive';
+import { FilmCard } from './components/film-card/film-card';
 
 @Component({
   selector: 'app-film-list',
+  imports: [AutofocusDirective, FilmCard],
   standalone: true,
   templateUrl: './film-list.html',
   styleUrl: './film-list.scss',
@@ -13,8 +16,13 @@ export class FilmList {
   private readonly filmsService = inject(FilmsService);
   private readonly router = inject(Router);
   readonly films = this.filmsService.films;
+  readonly favorites = this.filmsService.favorites;
   readonly search = signal('');
-  private readonly breadcrumbService = inject(BreadcrumbService);
+  readonly showFavoritesOnly = signal(false);
+
+  readonly sourceFilms = computed(() =>
+    this.showFavoritesOnly() ? this.filmsService.favorites() : this.films(),
+  );
 
   onSearchInput(event: Event): void {
     const target = event.target as HTMLInputElement | null;
@@ -23,11 +31,13 @@ export class FilmList {
 
   readonly filteredFilms = computed(() => {
     const q = this.search().trim().toLowerCase();
+    const source = this.sourceFilms();
+
     if (!q) {
-      return this.films();
+      return source;
     }
 
-    return this.films().filter((film) => film.title.toLowerCase().includes(q));
+    return source.filter((film) => film.title.toLowerCase().includes(q));
   });
 
   openDetails(film: Film): void {
@@ -36,8 +46,11 @@ export class FilmList {
     });
   }
 
-  toggleFavorite(film: Film, event: MouseEvent): void {
-    event.stopPropagation();
+  toggleFavorite(film: Film): void {
     this.filmsService.toggleFavorite(film.id);
+  }
+
+  toggleShowFavorites(): void {
+    this.showFavoritesOnly.update((v) => !v);
   }
 }

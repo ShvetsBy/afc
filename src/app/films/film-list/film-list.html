@@ -8,8 +8,13 @@
       placeholder="Search by title"
       [value]="search()"
       (input)="onSearchInput($event)"
+      appAutofocus
     />
   </div>
+
+  <button type="button" class="filmsList-toggleFavorites" (click)="toggleShowFavorites()">
+    {{ showFavoritesOnly() ? 'Show all films' : 'Show favorites only' }}
+  </button>
 
   @if (!films().length) {
     <p>No films available</p>
@@ -19,23 +24,11 @@
 
   <div class="filmsList-cards">
     @for (film of filteredFilms(); track film.id) {
-      <div class="filmsList-card" (click)="openDetails(film)">
-        <img class="filmsList-card__poster" [src]="film.posterUrl" [alt]="film.title" />
-
-        <div class="filmsList-card__body">
-          <h2 class="filmsList-card__title">{{ film.title }}</h2>
-          <p class="filmsList-card__meta">{{ film.year }} · {{ film.genre }}</p>
-          <p class="filmsList-card__rating">Rating: {{ film.rating }}</p>
-
-          <button
-            type="button"
-            class="filmsList-card__favorite"
-            (click)="toggleFavorite(film, $event)"
-          >
-            {{ film.isFavorite ? 'Remove from favorites' : 'Add to favorites' }}
-          </button>
-        </div>
-      </div>
+      <app-film-card
+        [film]="film"
+        (open)="openDetails($event)"
+        (toggleFavorite)="toggleFavorite($event)"
+      ></app-film-card>
     }
   </div>
 </section>

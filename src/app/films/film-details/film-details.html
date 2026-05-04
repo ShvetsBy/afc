@@ -10,7 +10,7 @@
 
         <p>{{ film.year }} · {{ film.genre }}</p>
         <p>Rating: {{ film.rating }}</p>
-        <p>Duration: {{ film.duration }} min</p>
+        <p>Duration: {{ film.duration | duration }}</p>
 
         <p class="film-details__description">
           {{ film.description }}

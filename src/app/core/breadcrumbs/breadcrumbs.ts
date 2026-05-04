@@ -6,6 +6,7 @@ import { BreadcrumbService } from './breadcrumb.service';
   selector: 'app-breadcrumbs',
   standalone: true,
   imports: [RouterLink],
+
   template: `
     @if (breadcrumbs().length) {
       <nav class="breadcrumbs">
