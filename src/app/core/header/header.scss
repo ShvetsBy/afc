@@ -6,6 +6,7 @@
   justify-content: space-between;
   align-items: center;
   background-color: $Background;
+  height: 100px;
 
   &-logo {
     display: flex;
@@ -39,5 +40,11 @@
   a,
   a:visited {
     color: $Primary;
+  }
+}
+
+@media (max-width: 400px) {
+  .header-logo-title {
+    display: none;
   }
 }

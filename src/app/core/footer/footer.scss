@@ -1,7 +1,31 @@
 .footer {
-  width: 100%;
+  padding: 20px;
+  height: 60px;
+  box-sizing: border-box;
+  border-top: 1px solid #e5e7eb;
+  background: #f5f3ef;
+
   display: flex;
-  gap: 0.5rem;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #6b7280;
+
+  a {
+    color: #2f3e46;
+    text-decoration: none;
+    font-weight: 500;
+
+    transition: 0.2s;
+
+    &:hover {
+      color: #e76f51;
+    }
+  }
+
+  p {
+    margin: 0;
+  }
 }

@@ -6,7 +6,7 @@
     <p class="filmCard-meta">{{ film.year }} · {{ film.genre }}</p>
     <p class="filmCard-rating">Rating: {{ film.rating }}</p>
 
-    <button type="button" class="filmCard-card__favorite" (click)="onFavoriteClick($event)">
+    <button type="button" class="filmCard-card-favorite" (click)="onFavoriteClick($event)">
       {{ film.isFavorite ? 'Remove from favorites' : 'Add to favorites' }}
     </button>
   </div>

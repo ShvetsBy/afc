@@ -4,6 +4,8 @@
 .breadcrumbs {
   @include content-container;
   color: $Muted;
+  height: 20px;
+  margin-bottom: 40px;
 
   &-item {
     &:not(:first-child)::before {
