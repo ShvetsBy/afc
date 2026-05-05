@@ -96,3 +96,9 @@
     }
   }
 }
+
+@media (max-width: 600px) {
+  .film-details-layout {
+    grid-template-columns: 1fr;
+  }
+}
