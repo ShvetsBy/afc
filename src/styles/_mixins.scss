@@ -1,0 +1,9 @@
+@mixin content-container($max-width: 1440px, $padding-x: 16px) {
+  width: 100%;
+  max-width: $max-width;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: $padding-x;
+  padding-right: $padding-x;
+  box-sizing: border-box;
+}

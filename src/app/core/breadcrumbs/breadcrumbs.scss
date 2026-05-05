@@ -1,0 +1,16 @@
+@use '../../../styles/mixins' as *;
+@use '../../../styles/variables' as *;
+
+.breadcrumbs {
+  @include content-container;
+  color: $Muted;
+  height: 20px;
+  margin-bottom: 40px;
+
+  &-item {
+    &:not(:first-child)::before {
+      content: '»';
+      margin: 0 0.2rem;
+    }
+  }
+}

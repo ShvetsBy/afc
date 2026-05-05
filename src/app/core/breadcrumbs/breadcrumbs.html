@@ -1,0 +1,9 @@
+<nav class="breadcrumbs">
+  @if (breadcrumbs(); as crumbs) {
+    @for (crumb of crumbs; track crumb.url) {
+      <a [routerLink]="crumb.url">
+        {{ crumb.label }}
+      </a>
+    }
+  }
+</nav>

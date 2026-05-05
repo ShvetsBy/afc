@@ -1,0 +1,46 @@
+<section class="filmsList">
+  <div class="filmsList-utils">
+    <h2>Film list</h2>
+
+    <div class="filmsList-search">
+      <svg class="filmsList-search-icon" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="7" stroke-width="2" fill="none" />
+        <line x1="16.5" y1="16.5" x2="21" y2="21" stroke-width="2" />
+      </svg>
+      <input
+        type="text"
+        placeholder="Search by title"
+        [value]="search()"
+        (input)="onSearchInput($event)"
+        appAutofocus
+      />
+    </div>
+
+    <button
+      class="filmsList-favoriteToggle"
+      [class.active]="showFavoritesOnly()"
+      (click)="toggleShowFavorites()"
+    >
+      <span class="filmsList-favoriteToggle-icon">❤</span>
+      <span class="filmsList-favoriteToggle-label">Favorites</span>
+    </button>
+  </div>
+
+  @if (!films().length) {
+    <p>No films available</p>
+  } @else if (!filteredFilms().length && showFavoritesOnly()) {
+    <p>No favorite films yet</p>
+  } @else if (!filteredFilms().length) {
+    <p>No films match your search</p>
+  }
+
+  <div class="filmsList-cards">
+    @for (film of filteredFilms(); track film.id) {
+      <app-film-card
+        [film]="film"
+        (open)="openDetails($event)"
+        (toggleFavorite)="toggleFavorite($event)"
+      ></app-film-card>
+    }
+  </div>
+</section>
